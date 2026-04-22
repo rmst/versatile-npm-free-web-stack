@@ -14,16 +14,17 @@ await build({
 	outdir: "dist",
 	format: "esm",
 	target: "browser",
-	jsxImportSource: "preact",
 })
 
 const app = new Hono()
 app.get("/api/hello", (c: Context) => c.json({ message: "hello" }))
 app.get("/*", (c: Context) => {
 	const p = c.req.path === "/" ? "/index.html" : c.req.path
-	const f = `./dist${p}`
-	if (!existsSync(f)) return c.notFound()
-	return c.body(readFileSync(f), { headers: { "content-type": getMimeType(f) ?? "application/octet-stream" } })
+	for (const root of ["./public", "./dist"]) {
+		const f = root + p
+		if (existsSync(f)) return c.body(readFileSync(f), { headers: { "content-type": getMimeType(f) ?? "application/octet-stream" } })
+	}
+	return c.notFound()
 })
 
 serve({ port: 3000 }, app.fetch)

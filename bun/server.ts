@@ -3,6 +3,7 @@
 
 import { Hono, Context } from "hono"
 import { serveStatic } from "hono/bun"
+import { watch } from "node:fs"
 
 const dev = process.argv.includes("--dev")
 
@@ -16,13 +17,13 @@ async function build() {
 }
 await build()
 if (dev) {
-	// Rebuild on any change under src/
-	const watcher = (await import("node:fs")).watch("src", { recursive: true }, build)
+	const watcher = watch("src", { recursive: true }, build)
 	process.on("SIGINT", () => { watcher.close(); process.exit() })
 }
 
 const app = new Hono()
 app.get("/api/hello", (c: Context) => c.json({ message: "hello" }))
+app.use("/*", serveStatic({ root: "./public" }))
 app.use("/*", serveStatic({ root: "./dist" }))
 
 export default { port: 3000, fetch: app.fetch }

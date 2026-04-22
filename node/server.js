@@ -5,14 +5,19 @@
 import { Hono } from "hono"
 import { serve } from "@hono/node-server"
 import { serveStatic } from "@hono/node-server/serve-static"
-import { execSync, spawn } from "node:child_process"
+import { execSync } from "node:child_process"
+import { watch } from "node:fs"
 
 const dev = process.argv.includes("--dev")
 
-const build = "esbuild src/main.tsx --bundle --outdir=dist --format=esm --jsx=automatic --jsx-import-source=preact --alias:react=preact/compat --alias:react-dom=preact/compat"
+const cmd = "esbuild src/main.tsx --bundle --outdir=dist --format=esm --jsx=automatic --jsx-import-source=preact --alias:react=preact/compat --alias:react-dom=preact/compat"
 
-if (dev) spawn(build + " --watch", { shell: true, stdio: "inherit" })
-else execSync(build, { stdio: "inherit" })
+function build() { execSync(cmd, { stdio: "inherit" }) }
+build()
+if (dev) {
+	const watcher = watch("src", { recursive: true }, build)
+	process.on("SIGINT", () => { watcher.close(); process.exit() })
+}
 
 const app = new Hono()
 
