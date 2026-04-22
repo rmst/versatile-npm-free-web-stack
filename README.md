@@ -12,21 +12,21 @@ Node:
 ```
 cd node/
 npm install
-npm start
+npm run dev
 ```
 
 Bun:
 ```
 cd bun/
 bun install
-bun start
+bun run dev
 ```
 
 Qn:
 ```
 cd qn/
-qn run prepare   # qn install only installs declared deps, so trigger prepare directly
-qn run start
+qn install
+qn run dev
 ```
 
 All three serve at `http://localhost:3000` (tiny Preact demo at `/`, example API at `/api/hello`).
