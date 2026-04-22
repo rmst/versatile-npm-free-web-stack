@@ -8,10 +8,25 @@ Three variants of a minimal npm-free stack using Preact, Hono, and Tailpipe, pul
 
 ## Quick start
 
+Node:
 ```
-cd node/     # or bun/, qn/
-npm install  # or bun install
-npm start    # or bun start, qn run start
+cd node/
+npm install
+npm start
 ```
 
-The app serves at `http://localhost:3000` (tiny Preact demo at `/`, example API at `/api/hello`).
+Bun:
+```
+cd bun/
+bun install
+bun start
+```
+
+Qn:
+```
+cd qn/
+qn install.js    # qn install doesn't run postinstall yet, so call it directly
+qn run start
+```
+
+All three serve at `http://localhost:3000` (tiny Preact demo at `/`, example API at `/api/hello`).
