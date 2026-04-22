@@ -1,0 +1,10 @@
+{
+	"name": "my-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"postinstall": "node install.js",
+		"start": "node server.js",
+		"dev": "node --watch server.js --dev"
+	}
+}

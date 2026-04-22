@@ -1,0 +1,10 @@
+{
+	"name": "my-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"postinstall": "qn install.js",
+		"start": "qn server.ts",
+		"dev": "qn --watch server.ts --dev"
+	}
+}

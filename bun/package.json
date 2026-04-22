@@ -1,0 +1,10 @@
+{
+	"name": "my-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"postinstall": "bun install.js",
+		"start": "bun server.ts",
+		"dev": "bun --watch server.ts --dev"
+	}
+}
