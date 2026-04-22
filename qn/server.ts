@@ -1,20 +1,21 @@
 // server.ts - Hono server running on qn.
-// qn transpiles .ts files on load (for our code) and has a built-in HTTP
-// server (qn:http), so neither esbuild nor @hono/node-server is needed for
-// the backend. esbuild is still invoked for the frontend bundle.
+// qn transpiles .ts files on load, has a built-in bundler (qn:bundle), and a
+// built-in HTTP server (qn:http). No esbuild, no @hono/node-server.
 
 import { Hono } from "hono"
 import type { Context } from "hono"
 import { serve } from "qn:http"
+import { build } from "qn:bundle"
 import { readFileSync, existsSync } from "node:fs"
 import { extname } from "node:path"
-import { execSync, spawn } from "node:child_process"
 
-const dev = process.argv.includes("--dev")
-
-const build = "esbuild src/main.tsx --bundle --outdir=dist --format=esm --jsx=automatic --jsx-import-source=preact"
-if (dev) spawn(build + " --watch", { shell: true, stdio: "inherit" })
-else execSync(build, { stdio: "inherit" })
+await build({
+	entrypoints: ["src/main.tsx"],
+	outdir: "dist",
+	format: "esm",
+	target: "browser",
+	jsxImportSource: "preact",
+})
 
 const MIME: Record<string, string> = {
 	".html": "text/html", ".js": "text/javascript", ".css": "text/css",
