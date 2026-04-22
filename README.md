@@ -25,7 +25,7 @@ bun start
 Qn:
 ```
 cd qn/
-qn install.js    # qn install doesn't run postinstall yet, so call it directly
+qn run prepare   # qn install only installs declared deps, so trigger prepare directly
 qn run start
 ```
 

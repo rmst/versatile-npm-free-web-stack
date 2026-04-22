@@ -1,4 +1,4 @@
-// install.js - Install dependencies directly from git at pinned commits.
+// dependencies.js - Install dependencies directly from git at pinned commits.
 // Prerequisites: git, node, esbuild on PATH.
 
 import { execSync } from "node:child_process"
@@ -8,7 +8,7 @@ import { mkdirSync, readFileSync, existsSync, globSync } from "node:fs"
 	{
 		name: "preact",
 		repo: "https://github.com/preactjs/preact",
-		hash: "21dd6d04c1a9a43e5b60976bb5eb7d856253195b",
+		hash: "21dd6d04c1a9a43e5b60976bb5eb7d856253195b",  // 11.0.0-beta.1
 		// preact's exports rename and nest (dist/preact.mjs, compat/dist/compat.mjs, ...) so the default build doesn't fit.
 		build: () => `
 			esbuild ./src --bundle --format=esm --outfile=dist/preact.mjs &&
@@ -20,19 +20,19 @@ import { mkdirSync, readFileSync, existsSync, globSync } from "node:fs"
 	{
 		name: "hono",
 		repo: "https://github.com/honojs/hono",
-		hash: "cf2d2b7edcf07adef2db7614557f4d7f9e2be7ba",
+		hash: "cf2d2b7edcf07adef2db7614557f4d7f9e2be7ba",  // v4.12.14
 		build,
 	},
 	{
 		name: "@hono/node-server",
 		repo: "https://github.com/honojs/node-server",
-		hash: "b5e63a366d9b0ef62ac65fcafd7f69b383b03ff5",
+		hash: "b5e63a366d9b0ef62ac65fcafd7f69b383b03ff5",  // v1.19.14
 		build,
 	},
 	{
 		name: "tailpipe",
 		repo: "https://github.com/rmst/tailpipe",
-		hash: "58ca7e91ab7110c6b25ee9fa4761e8687f549e3f",
+		hash: "58ca7e91ab7110c6b25ee9fa4761e8687f549e3f",  // 0.1.0
 		// no build step necessary
 	},
 

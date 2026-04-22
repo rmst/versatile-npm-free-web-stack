@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"postinstall": "bun install.js",
+		"prepare": "bun dependencies.js",
 		"start": "bun server.ts",
 		"dev": "bun --watch server.ts --dev"
 	}

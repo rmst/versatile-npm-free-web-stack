@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"postinstall": "qn install.js",
+		"prepare": "qn dependencies.js",
 		"start": "qn server.ts",
 		"dev": "qn --watch server.ts --dev"
 	}
