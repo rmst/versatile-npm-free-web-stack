@@ -7,14 +7,23 @@ import type { Context } from "hono"
 import { serve } from "qn:http"
 import { build } from "qn:bundle"
 import { getMimeType } from "hono/utils/mime"
-import { readFileSync, existsSync } from "node:fs"
+import { readFileSync, existsSync, watch } from "node:fs"
 
-await build({
-	entrypoints: ["src/main.tsx"],
-	outdir: "dist",
-	format: "esm",
-	target: "browser",
-})
+const dev = process.argv.includes("--dev")
+
+async function rebuild() {
+	await build({
+		entrypoints: ["src/main.tsx"],
+		outdir: "dist",
+		format: "esm",
+		target: "browser",
+	})
+}
+await rebuild()
+if (dev) {
+	const watcher = watch("src", { recursive: true }, rebuild)
+	process.on("SIGINT", () => { watcher.close(); process.exit() })
+}
 
 const app = new Hono()
 app.get("/api/hello", (c: Context) => c.json({ message: "hello" }))
