@@ -3,8 +3,29 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"prepare": "bun dependencies.js",
+		"prepare": "bun install.js",
 		"start": "bun server.ts",
 		"dev": "bun --watch server.ts --dev"
+	},
+	"sourceDependencies": {
+		"preact": {
+			"git": "https://github.com/preactjs/preact",
+			"rev": "21dd6d04c1a9a43e5b60976bb5eb7d856253195b",
+			"exports": {
+				".": "./src/index.js",
+				"./compat": "./compat/src/index.js",
+				"./hooks": "./hooks/src/index.js",
+				"./jsx-runtime": "./jsx-runtime/src/index.js",
+				"./jsx-dev-runtime": "./jsx-runtime/src/index.js"
+			}
+		},
+		"hono": {
+			"git": "https://github.com/honojs/hono",
+			"rev": "cf2d2b7edcf07adef2db7614557f4d7f9e2be7ba"
+		},
+		"tailpipe": {
+			"git": "https://github.com/rmst/tailpipe",
+			"rev": "58ca7e91ab7110c6b25ee9fa4761e8687f549e3f"
+		}
 	}
 }
