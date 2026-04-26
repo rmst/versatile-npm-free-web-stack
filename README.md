@@ -4,7 +4,7 @@ Three variants of a minimal npm-free stack using Preact, Hono, and Tailpipe, pul
 
 - [`node/`](node/) — Node + esbuild. Needs `git` and `esbuild` on PATH.
 - [`bun/`](bun/) — Bun only. No esbuild, no `@hono/node-server`.
-- [`qn/`](qn/) — [qn](https://github.com/rmst/qn) + esbuild. Same shape as the Bun variant.
+- [`qn/`](qn/) — [qn](https://github.com/rmst/qn) only. No esbuild, no `@hono/node-server`. Same shape as the Bun variant.
 
 ## Quick start
 
