@@ -3,7 +3,6 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"prepare": "qn install.js",
 		"start": "qn server.ts",
 		"dev": "qn --watch server.ts --dev"
 	},
